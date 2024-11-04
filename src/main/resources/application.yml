@@ -1,10 +1,10 @@
 spring:
   kafka:
     # 以逗号分隔的地址列表，用于建立与Kafka集群的初始连接(kafka 默认的端口号为9092)
-    bootstrap-servers: 192.168.3.196:9092
+    bootstrap-servers: 127.0.0.1:9092
     producer:
       # 发生错误后，消息重发的次数。
-      retries: 0
+      retries: 5
       #当有多个消息需要被发送到同一个分区时，生产者会把它们放在同一个批次里。该参数指定了一个批次可以使用的内存大小，按照字节数计算。
       batch-size: 16384
       # 设置生产者内存缓冲区的大小。
@@ -19,20 +19,17 @@ spring:
       acks: 1
     consumer:
       # 自动提交的时间间隔 在spring boot 2.X 版本中这里采用的是值的类型为Duration 需要符合特定的格式，如1S,1M,2H,5D
-      auto-commit-interval: 1S
+#      auto-commit-interval: 1S
       # 该属性指定了消费者在读取一个没有偏移量的分区或者偏移量无效的情况下该作何处理：
       # latest（默认值）在偏移量无效的情况下，消费者将从最新的记录开始读取数据（在消费者启动之后生成的记录）
       # earliest ：在偏移量无效的情况下，消费者将从起始位置读取分区的记录
       auto-offset-reset: earliest
       # 是否自动提交偏移量，默认值是true,为了避免出现重复数据和数据丢失，可以把它设置为false,然后手动提交偏移量
-      enable-auto-commit: true
+      enable-auto-commit: false
       # 键的反序列化方式
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       # 值的反序列化方式
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     listener:
       # 在侦听器容器中运行的线程数。
-      concurrency: 5
-
-server:
-  port: 19091
+      concurrency: 1

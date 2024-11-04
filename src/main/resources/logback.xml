@@ -1,0 +1,16 @@
+<configuration>
+    <!-- 定义日志输出格式 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 设置根日志级别为 INFO -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+    <!-- 可以针对特定包或类设置不同的日志级别 -->
+    <logger name="com.heibaiying.springboot.consumer" level="INFO" />
+</configuration>
