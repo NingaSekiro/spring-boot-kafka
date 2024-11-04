@@ -21,12 +21,7 @@ import java.util.UUID;
  */
 @Component
 public class GroupQueue implements Runnable {
-    static KafkaConsumer consumer;
-
-    public static void main(String[] args) {
-        int i = Math.abs("test".hashCode()) % 50;
-        System.out.println(i);
-    }
+    protected KafkaConsumer consumer;
 
     public void run() {
         System.out.println("start");
